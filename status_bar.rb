@@ -12,7 +12,7 @@ class App < NSObject
 
     status_item.setImage image
     SpeechController.alloc.init.add_menu_to status_item
-    @spoken_count = 0X
+    @spoken_count = 0
   end
 
   def applicationShouldTerminate(app)
@@ -35,6 +35,7 @@ class SpeechController < NSObject
   end
 
   def add_menu_to(container)
+    @status_item = container
     menu = NSMenu.alloc.init
     container.setMenu menu
     menu_item = menu.addItemWithTitle_action_keyEquivalent "Speak", "speak:", ''
@@ -46,12 +47,10 @@ class SpeechController < NSObject
 
   def speak(sender)
     @synthesizer.startSpeakingString "I have nothing to say."
-    NSApp.delegate.app_did_speak
     sender.setTitle "Speak Again"
+    @status_item.setTitle "Also Sprach"
   end
-  
 end
-
 
 NSApplication.sharedApplication
 NSApp.setDelegate(App.alloc.init)

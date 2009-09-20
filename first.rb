@@ -3,7 +3,7 @@ include OSX
 
 class AppDelegate < NSObject
   def applicationDidFinishLaunching(aNote)
-    puts "got a notification: #{aNote.name}, #{aNote.object.to_h}"
+    puts "got a notification: #{aNote.name}, #{aNote.object.to_s}"
   end
 end
 
